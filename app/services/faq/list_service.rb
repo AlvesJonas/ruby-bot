@@ -14,6 +14,7 @@ module FaqModule
         #faqs = Hashtag.where(name: @query).includes(:faqs).inject([]) do |faqs, hashtag|
           #faqs << hashtag.faqs
         #end.uniq
+        faqs = []
         Faq.all.each do |faq|
           faq.hashtags.each do |hashtag|
             faqs << faq if hashtag.name == @query
