@@ -2,11 +2,6 @@ require_relative './../../spec_helper.rb'
 
 
 describe FaqModule::ListService do
-  before do
-    @company = create(:company)
-  end
-
-
   describe '#call' do
     context "list command" do
       context "Zero faqs in database" do
@@ -23,8 +18,8 @@ describe FaqModule::ListService do
         it "Find questions and answer in response" do
           @listService = FaqModule::ListService.new({}, 'list')
     
-          faq1 = create(:faq, company: @company)
-          faq2 = create(:faq, company: @company)
+          faq1 = create(:faq)
+          faq2 = create(:faq)
     
           response = @listService.call()
     
@@ -49,7 +44,7 @@ describe FaqModule::ListService do
 
       context "Valid query" do
         it "find question and answer in response" do
-          faq = create(:faq, company: @company)
+          faq = create(:faq)
     
           @listService = FaqModule::ListService.new({'query' => faq.question.split(" ").sample}, 'search')
     
@@ -73,8 +68,8 @@ describe FaqModule::ListService do
 
       context "Valid hashtag" do
         it "With valid hashtag, find question and answer in response" do
-          faq = create(:faq, company: @company)
-          hashtag = create(:hashtag, company: @company)
+          faq = create(:faq)
+          hashtag = create(:hashtag)
           create(:faq_hashtag, faq: faq, hashtag: hashtag)
     
           @listService = FaqModule::ListService.new({'query' => hashtag.name}, 'search_by_hashtag')

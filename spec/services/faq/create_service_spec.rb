@@ -2,7 +2,6 @@ require_relative './../../spec_helper.rb'
 
 describe FaqModule::CreateService do
   before do
-    @company = create(:company)
     @question = FFaker::Lorem.sentence
     @answer = FFaker::Lorem.sentence
     @hashtags = "#{FFaker::Lorem.word}, #{FFaker::Lorem.word}"
@@ -12,7 +11,7 @@ describe FaqModule::CreateService do
   describe '#call' do
     context "Without hashtag params" do
       it "will receive a error" do
-        @createService = FaqModule::CreateService.new({"question-original" => @question, "answer-original" => @answer})
+        @createService = FaqModule::CreateService.new({"question" => @question, "answer" => @answer})
         response = @createService.call()
         expect(response).to match("Hashtag Obrigatória")
       end
@@ -20,7 +19,7 @@ describe FaqModule::CreateService do
 
     context "With Valid params" do
       before do
-        @createService = FaqModule::CreateService.new({"question-original" => @question, "answer-original" => @answer, "hashtags-original" => @hashtags})
+        @createService = FaqModule::CreateService.new({"question" => @question, "answer" => @answer, "hashtags" => @hashtags})
         @response = @createService.call()
       end
 
