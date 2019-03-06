@@ -9,6 +9,10 @@ class InterpretService
       FaqModule::RemoveService.new(params).call()
     when "help"
       HelpService.call()
+    when "translate"
+      LanguageModule::TranslateService.params(params).call()
+    when "translate_with_source"
+      LanguageModule::TranslateWithSourceService.params(params).call()
     else
       "Não compreendi o seu desejo"
     end
