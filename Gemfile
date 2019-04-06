@@ -14,6 +14,7 @@ end
 gem "factory_bot"
 gem "ffaker"
 gem 'database_cleaner'
+gem 'rest-client'
 
 group :test do
   gem "rack-test", require: "rack/test"
